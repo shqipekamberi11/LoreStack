@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Character extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+        'role',
+        'age',
+        'backstory',
+        'species',
+    ];
+
+    // A character can participate in many events
+    public function events()
+    {
+        return $this->belongsToMany(Event::class)
+                    ->withPivot('involvement')
+                    ->withTimestamps();
+    }
+}
